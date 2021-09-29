@@ -1,8 +1,25 @@
+{% from 'form_helper.html' import displayField %}
+
 {% extends "plogin.html" %}
 
 {% block title %}Cadastro {% endblock %}
 
 {% block content %}
   <h1>Vamos começar!</h1>
+
+  <form action="{{ url_for('index')}}", method="POST">
+
+    {{ displayField(form.nomeusuario, 'Nome de usuário', autocomplete="off",
+         autofocus=true)}}
+    {{ displayField(form.senha, 'Senha')}}
+    {{ displayField(form.confirmar_senha, 'Confirme sua senha')}}
+
+    <div>
+      {{ form.botao_cadastrar }}
+    </div>
+
+    {{ form.csrf_token }}
+
+  </form>
 
 {% endblock %}
