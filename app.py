@@ -18,11 +18,6 @@ def index():
         nomeusuario = cad_form.nomeusuario.data
         senha = cad_form.senha.data
 
-        # Verifica se nomeusuario existe
-        usuario_objeto = User.query.filter_by(nomeusuario=nomeusuario).first()
-        if usuario_objeto:
-            return "Esse nome de usuário já existe!"
-
         # Adiciona usuário ao banco de dados
         usuario = User(nomeusuario=nomeusuario, senha=senha)
         db.session.add(usuario)

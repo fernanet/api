@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, EqualTo
+from wtforms.validators import InputRequired, Length, EqualTo, ValidationError
+
+from models import User
 
 class CadastroForm(FlaskForm):
     """ Formulário de Cadastro """
@@ -15,3 +17,8 @@ class CadastroForm(FlaskForm):
         validators=[InputRequired(message="A senha é obrigatória!"),
         EqualTo('senha', message="As senhas devem ser iguais!")])
     botao_cadastrar = SubmitField('Cadastrar')
+
+    def valida_nomeusuario(self, nomeusuario):
+        usuario_objeto = User.query.filter_by(nomeusuario=nomeusuario.data).first()
+        if usuario_objeto:
+            raise ValidationError("O nome de usuário já existe. Escolha outro nome de usuário.")
