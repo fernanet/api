@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from wtform_campos import *
 from models import *
 
@@ -14,6 +14,8 @@ db = SQLAlchemy(app)
 def index():
 
     cad_form = CadastroForm()
+
+    # Banco de dados atualizado se validação ocorrer com sucesso
     if cad_form.validate_on_submit():
         nomeusuario = cad_form.nomeusuario.data
         senha = cad_form.senha.data
@@ -22,9 +24,21 @@ def index():
         usuario = User(nomeusuario=nomeusuario, senha=senha)
         db.session.add(usuario)
         db.session.commit()
-        return "Inserido no banco de dados"
+
+        return redirect(url_for('login'))
 
     return render_template("index.html", form=cad_form)
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+
+    login_form = LoginForm()
+
+    # Permite logar se validação ocorrer com sucesso
+    if login_form.validate_on_submit():
+        return "Logado, finalmente!"
+
+    return render_template("login.html", form=login_form)
 
 if __name__ == "__main__":
     app.run(debug=True)

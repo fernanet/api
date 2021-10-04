@@ -1,0 +1,23 @@
+{% from 'form_helper.html' import displayField %}
+{% extends 'plogin.html' %}
+
+{% block title %}Login {% endblock %}
+
+{% block content %}
+    <h2>Entre agora!</h2>
+    <p>Informe seu nome de usuário e senha para iniciar o MimiChat</p>
+
+    <form action="{{ url_for('login')}}" method="POST">
+      {{ displayField(form.nomeusuario, 'Nome de usuário', autocomplete="off",
+           autofocus=true)}}
+      {{ displayField(form.senha, 'Senha')}}
+
+      <div>
+        {{ form.botao_cadastrar }}
+      </div>
+
+      {{ form.csrf_token }}
+
+    </form>
+
+{% endblock %}

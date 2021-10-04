@@ -4,6 +4,20 @@ from wtforms.validators import InputRequired, Length, EqualTo, ValidationError
 
 from models import User
 
+def credenciais_invalida(form, campo):
+    """ Validador de nome de usuário e senha """
+
+    nomeusuario_in = form.nomeusuario.data
+    senha_in = campo.data
+
+    # Verifica se as credenciais são válidas
+    usuario_objeto = User.query.filter_by(nomeusuario=nomeusuario_in).first()
+    if usuario_objeto is None:
+        raise ValidationError("Nome de usuário ou senha está incorreto!")
+    elif senha_in != usuario_objeto.senha:
+        raise ValidationError("Nome de usuário ou senha está incorreto!")
+
+
 class CadastroForm(FlaskForm):
     """ Formulário de Cadastro """
 
@@ -22,3 +36,13 @@ class CadastroForm(FlaskForm):
         usuario_objeto = User.query.filter_by(nomeusuario=nomeusuario.data).first()
         if usuario_objeto:
             raise ValidationError("O nome de usuário já existe. Escolha outro nome de usuário.")
+
+class LoginForm(FlaskForm):
+    """ Formulário de login """
+
+    nomeusuario = StringField('nomeusuario_label',
+        validators=[InputRequired(message="Nome de usuário é obrigatório!")])
+    senha=StringField('senha_label',
+        validators=[InputRequired(message="Senha é obrigatória!"),
+        credenciais_invalida])
+    botao_cadastrar = SubmitField('Entrar')
