@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, EqualTo, ValidationError
-
+from passlib.hash import pbkdf2_sha256
 from models import User
 
 def credenciais_invalida(form, campo):
@@ -14,7 +14,7 @@ def credenciais_invalida(form, campo):
     usuario_objeto = User.query.filter_by(nomeusuario=nomeusuario_in).first()
     if usuario_objeto is None:
         raise ValidationError("Nome de usuário ou senha está incorreto!")
-    elif senha_in != usuario_objeto.senha:
+    elif not pbkdf2_sha256.verify(senha_in, usuario_objeto.senha):
         raise ValidationError("Nome de usuário ou senha está incorreto!")
 
 

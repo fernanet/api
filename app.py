@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, url_for
+
 from wtform_campos import *
 from models import *
 
@@ -20,8 +21,11 @@ def index():
         nomeusuario = cad_form.nomeusuario.data
         senha = cad_form.senha.data
 
+        # Hash senha
+        senha_hashed = pbkdf2_sha256.hash(senha)
+
         # Adiciona usuário ao banco de dados
-        usuario = User(nomeusuario=nomeusuario, senha=senha)
+        usuario = User(nomeusuario=nomeusuario, senha=senha_hashed)
         db.session.add(usuario)
         db.session.commit()
 
