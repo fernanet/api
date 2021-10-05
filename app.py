@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
 
 from wtform_campos import *
@@ -39,6 +39,8 @@ def index():
         db.session.add(usuario)
         db.session.commit()
 
+        flash('Cadastrado com sucesso. Por favor, efetue login.', 'sucesso')
+
         return redirect(url_for('login'))
 
     return render_template("index.html", form=cad_form)
@@ -63,7 +65,8 @@ def login():
 def chat():
 
     if not current_user.is_authenticated:
-        return "Por favor, efetue login antes de acessar o chat"
+        flash('Por favor, efetue login.', 'perigo')
+        return redirect(url_for('login'))
 
     return "Chat with me"
 
@@ -71,7 +74,8 @@ def chat():
 def logout():
 
     logout_user()
-    return "Efetuou logout usando flask-login!"
+    flash('Você efetuou logout com sucesso', 'sucesso')
+    return redirect(url_for('login'))
 
 if __name__ == "__main__":
     app.run(debug=True)

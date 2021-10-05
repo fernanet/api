@@ -5,6 +5,18 @@
     <title>{% block title %}{% endblock %} - MimiChat</title>
   </head>
   <body>
+    <!-- mensagens Flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+
+            Category: {{ messages[0][0] }}
+            {{ messages[0][1] }}
+
+
+        {% endif %}
+    {% endwith %}
+
+
     {% block content %}
 
     {% endblock %}
