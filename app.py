@@ -102,4 +102,4 @@ def leave(data):
     send({'msg': data['nomeusuario'] + " tem deixado a " + data['sala'] + "sala."}, room=data['sala'])
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    app.run()
