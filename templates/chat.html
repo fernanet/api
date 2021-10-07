@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <!-- Barra de navegação -->
+    <nav>
+
+    </nav>
+
+    <div id="secao-principal">
+        <!-- Seleção de sala -->
+        <nav id="barra-lateral">
+            <h4>SALAS</h4>
+            {% for room in rooms %}
+                <p class="selecione-sala">{{ room|title }}</p>
+            {% endfor %}
+
+        </nav>
+
+        <!-- Área de mensagem -->
+        <div id="painel-lado-direito">
+            <!-- Exibição de mensagem -->
+            <div id="secao-exibe-mensagem">
+
+            </div>
+            <!-- Mensagem de entrada -->
+            <div id="area-entrada">
+                <input type="text" id="usuario_mensagem" placeholder="Digite aqui..." autocomplete="off">
+
+                <button type="button" id="envia_mensagem">ENVIAR</button>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Recebe nomeusuario -->
+    <script type="text/javascript">
+        const nomeusuario = `{{ nomeusuario }}`;
+    </script>
+
+    <!-- Personalizado chat JS -->
+    <scripts src="{{ url_for('static', filename='scripts/chat_pag.js') }}">
+
+    </script>
+
+    <!-- SocketIO JS -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+
+    <!-- Personalizado SocketIO JS -->
+    <script src="{{ url_for('static', filename='scripts/socketio.js') }}">
+
+  </body>
+</html>
