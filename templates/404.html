@@ -1,0 +1,14 @@
+{% from 'macro.html' import displayField %}
+{% extends "plogin.html" %}
+
+{% block title %}Página não encontrada {% endblock %}
+
+{% block content %}
+    <h2>Desculpe, a página que você está procurando não existe!</h2>
+    <br/>
+    <h4>Vá para <a href={{url_for('login')}}>página de login</a> para iniciar o bate-papo.</h4>
+    <br/>
+    <hr>
+
+    <p>Não é cadastrado? <a href={{url_for('index')}}>Cadastre-se aqui</a>.</p>
+{% endblock %}

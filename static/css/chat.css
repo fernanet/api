@@ -1,0 +1,149 @@
+.wrapper {
+    display: flex;
+}
+
+#secao-principal {
+    overflow: hidden; /* Makee this div contain its floated children */
+    width: 100%;
+}
+
+#barralateral {
+    margin-top: 2em;
+    float: left; /* Deixa esta divisão tão largo quanto seu conteúdo */
+    min-height: 96vh;
+    padding-left: 1em;
+    padding-top: 3em;
+    padding-right:1em;
+    border-right: 0.5px solid #898c91;
+}
+
+#barralateral p {
+    padding-left: 2em;
+    padding-right:2em;
+}
+
+#barralateral p:hover {
+    background-color: #ffc107;
+}
+
+#barralateral h4 {padding-left: 0.5em;}
+
+#barralateral.visualiza-barralateral {display: none;}
+
+#exibe-botao-barralateral {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s;
+    color: #335177;
+}
+
+@media (max-width: 567px) {
+    #barralateral {
+        display: none;
+    }
+
+    #barralateral.visualiza-barralateral {
+        display: block;
+    }
+
+    #exibe-botao-barralateral {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.ponteiro-cursor {
+    cursor: pointer;
+}
+
+#painel-lado-direito {
+    overflow: hidden; /* Make this div take up the rest of the horizontal space, and no more */
+}
+
+#secao-exibe-mensagem {
+    margin-top: 5em;
+    min-height: 82vh;
+    max-height: 82vh;
+    overflow-y: auto; /*Make  this section scrolable */
+}
+
+#area-entrada {
+    padding-left: 1em;
+    padding-right: 1em;
+    bottom: 0;
+}
+
+input[type=text]:focus{
+    border-color: #ffc107;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 10px #ffc107;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.outras-msg {
+    margin-right:7em;
+    margin-left: 1em;
+    padding: 0.5em 0.5em 0.5em 1em;
+    border-radius: 5px;
+    border-color: grey;
+    border-width: 0.5px;
+    border-style: solid;
+    background-color: #C2DBFB;
+    /* animation */
+    animation-name: fadeIn;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+
+.minha-msg {
+    margin-left:7em;
+    margin-right:1em;
+    padding: 0.5em 0.5em 0.5em 1em;
+    border-radius: 5px;
+    border-color: #206ED2;
+    border-width: 1px;
+    border-style: solid;
+    /* animation */
+    animation-name: fadeIn;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+
+.sistema-msg {
+    margin-right:7em;
+    margin-left: 1em;
+    padding: 0.5em 0.5em 0.5em 1em;
+    color: #656d78;
+    font-size:0.9em;
+}
+
+.timestamp {
+    color: #656d78;
+    font-size:0.7em;
+}
+
+.outro-nomeusuario {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #206ED2;
+}
+
+.meu-nomeusuario {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #FF6B13;
+}
+
+#msg-entrada {
+    border-color: #ffc107;
+    border-width: 5px;
+}
+
+#recebe-nomeusuario {
+    display: none !important;
+}

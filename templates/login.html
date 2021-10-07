@@ -1,4 +1,4 @@
-{% from 'form_helper.html' import displayField %}
+{% from 'macro.html' import displayField %}
 {% extends 'plogin.html' %}
 
 {% block title %}Login {% endblock %}
@@ -12,12 +12,16 @@
            autofocus=true)}}
       {{ displayField(form.senha, 'Senha')}}
 
-      <div>
+      <div class="form-group">
         {{ form.botao_cadastrar }}
       </div>
 
       {{ form.csrf_token }}
 
     </form>
+
+    <hr>
+
+    <p>Não é cadastrado? <a href={{url_for('index')}}>Cadastre-se aqui</a>.</p>
 
 {% endblock %}

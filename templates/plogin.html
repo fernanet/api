@@ -1,25 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
+
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>{% block title %}{% endblock %} - MimiChat</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- CSS personalizado para a página plogin.html -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/principal.css') }}">
   </head>
+
   <body>
-    <!-- mensagens Flash -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
+    <!-- Início da seção principal -->
+        <div class="secao-principal">
 
-            Category: {{ messages[0][0] }}
-            {{ messages[0][1] }}
+            <div class="jumbotron">
+              <h1 class="display-4">MimiChat</h1>
+              <p class="lead">As salas de bate-papo estão de volta!</p>
+            </div>
 
+            <!-- Início da imagem de demonstração -->
+            <div id="secao-imagem">
+                <picture>
+                    <img class="cartao" src="{{ url_for('static', filename='imagens/demo.gif') }}" border="5px">
+                </picture>
+            </div>
+            <!-- Final da imagem de demonstração -->
 
-        {% endif %}
-    {% endwith %}
+            <!-- Início do lado da mão direita -->
+            <div id="lado-maodireita">
 
+                <!-- Início das mensagens de erro Flask -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    <!-- As mensagens, se houver, são retornadas como uma lista. E nem todo redenreamento das páginas terá uma mensagem. Então colocamos uma condição para verificar se a lista de mensagens está vazia -->
+                    {% if messages %}
+                        <!-- Definiremos a classe de nosso arquivo css personalizado que criamos anteriormente. E queremos ver o primeiro item da lista. -->
+                        <div class="alert alert-{{ messages[0][0] }} " role="alert">
+                            {{ messages[0][1] }}
+                        </div>
+                        <hr>
+                    {% endif %}
+                {% endwith %}
+                <!-- Final das mensagens de erro Flask -->
 
-    {% block content %}
-
-    {% endblock %}
-
+                {% block content %}
+                {% endblock %}
+            </div>
+            <!-- Final do lado da mão direita -->
+        </div>
+        <!-- Final da seção principal -->
+            
   </body>
 </html>

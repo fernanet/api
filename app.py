@@ -1,3 +1,5 @@
+import os
+
 from time import localtime, strftime
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
@@ -8,10 +10,10 @@ from models import *
 
 # Configura app
 app = Flask(__name__)
-app.secret_key = 'replace later'
+app.secret_key = os.environ.get('SECRET')
 
 # Configura banco de dados
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql://xrqpjawfbnmaom:2ba5d7716cd766dd20b94d1a77392fb7f32a3e5ad44114ffa8fb584314da7a19@ec2-34-197-135-44.compute-1.amazonaws.com:5432/d1rjbebpnttoen'
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 db = SQLAlchemy(app)
 
 # Inicializa Flask-SocketIO
